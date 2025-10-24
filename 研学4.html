@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宁乡文旅研学活动</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "SimHei", sans-serif;
+        }
+        
+        :root {
+            --primary-color: #8b1a1a; /* 红色主题色 */
+            --secondary-color: #1a478b; /* 蓝色辅助色 */
+            --accent-color: #d4af37; /* 金色点缀 */
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://via.placeholder.com/1200x600/8b1a1a/ffffff?text=宁乡文旅研学') center/cover no-repeat;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* 导航栏样式 */
+        nav {
+            background-color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .nav-logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* 主要内容区域样式 */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto;
+        }
+        
+        /* 历史文化展示区域 */
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .culture-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .culture-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .culture-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .culture-content {
+            padding: 20px;
+        }
+        
+        .culture-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #6d1313;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-large {
+            font-size: 1.2rem;
+            padding: 15px 40px;
+        }
+        
+        .btn-center {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            width: fit-content;
+        }
+        
+        /* 问卷样式 */
+        .questionnaire {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+        }
+        
+        .question-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .option {
+            flex: 1 1 calc(50% - 10px);
+            min-width: 200px;
+        }
+        
+        .option input {
+            display: none;
+        }
+        
+        .option label {
+            display: block;
+            padding: 12px 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .option input:checked + label {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 路线展示样式 */
+        .route {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .route-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .route-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .route-desc {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .route-stops {
+            list-style-type: none;
+            margin-bottom: 25px;
+        }
+        
+        .route-stops li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .route-stops li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-menu {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-menu li {
+                margin: 5px 10px;
+            }
+            
+            .option {
+                flex: 1 1 100%;
+            }
+            
+            .questionnaire, .route {
+                padding: 20px;
+            }
+            
+            header {
+                padding: 60px 0;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-menu li {
+                margin: 10px 0;
+            }
+            
+            .options {
+                flex-direction: column;
+            }
+            
+            .option {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header>
+        <div class="container">
+            <div class="logo">宁乡文旅研学</div>
+            <p class="tagline">探寻千年古邑，传承红色基因，体验非遗匠心，感受乡村振兴</p>
+            <a href="#questionnaire" class="btn btn-large">开启研学之旅</a>
+        </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="container nav-container">
+            <div class="nav-logo">宁乡文旅</div>
+            <ul class="nav-menu">
+                <li><a href="#history">历史底蕴</a></li>
+                <li><a href="#red-culture">红色文化</a></li>
+                <li><a href="#intangible">非遗传承</a></li>
+                <li><a href="#questionnaire">研学路线</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 历史文化展示区域 -->
+    <section id="history" class="section">
+        <div class="container">
+            <h2 class="section-title">宁乡历史底蕴</h2>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <!-- 此处可以替换为宁乡历史底蕴相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/1a478b/ffffff?text=宁乡历史底蕴');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">千年古邑</h3>
+                        <p>宁乡历史悠久，文化底蕴深厚，是楚文化的重要发源地之一。早在商周时期，这里就有人类活动痕迹，炭河里遗址的发现更是将宁乡的历史追溯至3000多年前。</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <!-- 此处可以替换为宁乡青铜文化相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/d4af37/ffffff?text=青铜文化');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">青铜文化</h3>
+                        <p>宁乡炭河里遗址出土的青铜器精美绝伦，展现了古代宁乡高度发达的青铜文明。四羊方尊等国宝级文物更是宁乡青铜文化的杰出代表。</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <!-- 此处可以替换为宁乡文脉传承相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/8b1a1a/ffffff?text=文脉传承');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">文脉传承</h3>
+                        <p>宁乡自古文风鼎盛，人才辈出。宋代大儒张栻在此讲学，开创了"湖湘学派"，对后世产生了深远影响。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 红色文化展示区域 -->
+    <section id="red-culture" class="section" style="background-color: #f8f8f8;">
+        <div class="container">
+            <h2 class="section-title">红色文化传承</h2>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <!-- 此处可以替换为刘少奇故里相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/8b1a1a/ffffff?text=刘少奇故里');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">刘少奇故里</h3>
+                        <p>刘少奇同志是伟大的马克思主义者，无产阶级革命家、政治家和理论家。参观刘少奇故里，了解他的革命生涯和崇高精神。</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <!-- 此处可以替换为何叔衡故居相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/8b1a1a/ffffff?text=何叔衡故居');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">何叔衡故居</h3>
+                        <p>何叔衡是中国共产党的创始人之一，他的故居保存完好，是了解早期中国共产党历史的重要场所。</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <!-- 此处可以替换为谢觉哉故居相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/8b1a1a/ffffff?text=谢觉哉故居');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">谢觉哉故居</h3>
+                        <p>谢觉哉是中国共产党早期重要领导人之一，他的故居展现了革命先辈艰苦朴素的作风和坚定的革命信念。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 非遗传承展示区域 -->
+    <section id="intangible" class="section">
+        <div class="container">
+            <h2 class="section-title">非遗匠心传承</h2>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <!-- 此处可以替换为青铜器制作技艺相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/d4af37/ffffff?text=青铜器制作');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">青铜器制作技艺</h3>
+                        <p>宁乡炭河里青铜器制作技艺源远流长，传承至今。体验古老的陶范铸造工艺，感受青铜文化的魅力。</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <!-- 此处可以替换为皮影戏相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/1a478b/ffffff?text=皮影戏');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">皮影戏</h3>
+                        <p>宁乡皮影戏是湖南非物质文化遗产的重要组成部分，以其独特的表演形式和浓郁的地方特色深受人们喜爱。</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <!-- 此处可以替换为四碟八碗相关图片 -->
+                    <div class="culture-img" style="background-image: url('https://via.placeholder.com/300x200/8b1a1a/ffffff?text=四碟八碗');"></div>
+                    <div class="culture-content">
+                        <h3 class="culture-title">四碟八碗</h3>
+                        <p>宁乡四碟八碗是当地传统宴席的代表，体现了宁乡独特的饮食文化和待客之道，是重要的非物质文化遗产。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 研学路线选择区域 -->
+    <section id="questionnaire" class="section" style="background-color: #f8f8f8;">
+        <div class="container">
+            <h2 class="section-title">选择您的研学路线</h2>
+            <p style="text-align: center; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                回答以下问题，我们将根据您的兴趣和需求为您推荐最合适的研学路线。
+            </p>
+            
+            <a href="#" class="btn btn-center" id="start-btn">开始问卷</a>
+            
+            <div class="questionnaire" id="questionnaire-container">
+                <form id="route-quiz">
+                    <!-- 问题将在这里动态生成 -->
+                </form>
+                <button class="btn btn-center" id="submit-btn" style="display: none;">提交答案</button>
+            </div>
+            
+            <!-- 路线结果展示 -->
+            <div class="route" id="route-result">
+                <!-- 路线内容将在这里动态生成 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <p>宁乡文旅研学平台致力于推广宁乡丰富的历史文化资源，提供优质的研学旅行体验，传承和弘扬中华优秀传统文化。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <p>电话：0731-88888888</p>
+                    <p>邮箱：info@ningxiang.com</p>
+                    <p>地址：湖南省宁乡市文旅大厦</p>
+                </div>
+                <div class="footer-section">
+                    <h3>关注我们</h3>
+                    <p>微信公众号：宁乡文旅研学</p>
+                    <p>抖音：@宁乡文旅</p>
+                    <p>微博：@宁乡文旅官方</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 宁乡文旅研学平台 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 问卷问题数据
+        const questions = [
+            {
+                id: 1,
+                text: "您对哪类历史文化最感兴趣？",
+                options: [
+                    { text: "革命历史与红色文化", value: "red" },
+                    { text: "自然风光与山水文化", value: "nature" },
+                    { text: "传统工艺与非遗文化", value: "craft" },
+                    { text: "乡村发展与民俗文化", value: "village" }
+                ]
+            },
+            {
+                id: 2,
+                text: "您希望研学活动的主要形式是？",
+                options: [
+                    { text: "参观学习与主题教育", value: "study" },
+                    { text: "户外探索与自然体验", value: "outdoor" },
+                    { text: "手工制作与实践操作", value: "practice" },
+                    { text: "乡村生活与民俗体验", value: "life" }
+                ]
+            },
+            {
+                id: 3,
+                text: "您更看重研学活动的哪个方面？",
+                options: [
+                    { text: "思想教育与精神传承", value: "spirit" },
+                    { text: "自然美景与休闲放松", value: "relax" },
+                    { text: "技能学习与文化传承", value: "skill" },
+                    { text: "乡村发展与现代变革", value: "development" }
+                ]
+            },
+            {
+                id: 4,
+                text: "您偏好哪种类型的互动体验？",
+                options: [
+                    { text: "聆听革命故事与历史讲解", value: "story" },
+                    { text: "欣赏自然风光与参与户外活动", value: "view" },
+                    { text: "亲手制作传统手工艺品", value: "make" },
+                    { text: "体验乡村生活与农耕文化", value: "farm" }
+                ]
+            },
+            {
+                id: 5,
+                text: "您对研学活动的时长有什么偏好？",
+                options: [
+                    { text: "全天深度体验", value: "full-day" },
+                    { text: "半天重点体验", value: "half-day" },
+                    { text: "多个短时体验组合", value: "multiple" },
+                    { text: "灵活安排，根据兴趣选择", value: "flexible" }
+                ]
+            },
+            {
+                id: 6,
+                text: "您希望研学活动包含哪些元素？",
+                options: [
+                    { text: "庄严的仪式感与集体活动", value: "ceremony" },
+                    { text: "自由探索与个性化体验", value: "free" },
+                    { text: "传统技艺学习与创作", value: "create" },
+                    { text: "乡村走访与交流互动", value: "communicate" }
+                ]
+            },
+            {
+                id: 7,
+                text: "您对研学活动的知识获取有什么期望？",
+                options: [
+                    { text: "深入了解革命历史与精神", value: "history" },
+                    { text: "学习自然地理与生态知识", value: "geography" },
+                    { text: "掌握传统工艺技能", value: "technique" },
+                    { text: "了解乡村振兴与发展", value: "rural" }
+                ]
+            },
+            {
+                id: 8,
+                text: "您偏好哪种类型的交通方式？",
+                options: [
+                    { text: "统一大巴，集体行动", value: "bus" },
+                    { text: "景区内部徒步游览", value: "walk" },
+                    { text: "结合多种交通方式", value: "multiple-transport" },
+                    { text: "灵活安排，部分自由活动", value: "flexible-transport" }
+                ]
+            },
+            {
+                id: 9,
+                text: "您希望研学活动包含哪些餐饮体验？",
+                options: [
+                    { text: "简单快捷的团队餐", value: "simple" },
+                    { text: "当地特色美食体验", value: "local" },
+                    { text: "自己动手制作传统美食", value: "cook" },
+                    { text: "农家乐乡村风味", value: "farmhouse" }
+                ]
+            },
+            {
+                id: 10,
+                text: "您对研学活动的纪念品有什么偏好？",
+                options: [
+                    { text: "红色文化纪念品", value: "red-souvenir" },
+                    { text: "自然风光摄影作品", value: "photo" },
+                    { text: "自己制作的手工艺品", value: "handmade" },
+                    { text: "当地农特产品", value: "local-product" }
+                ]
+            }
+        ];
+
+        // 路线数据
+        const routes = {
+            "red": {
+                title: "红色寻根·信仰之路",
+                subtitle: "追寻革命足迹，传承红色基因",
+                description: "这条路线以宁乡丰富的红色文化资源为核心，通过参观革命先辈故居、聆听红色故事、举行庄严仪式等方式，让参与者深刻感受革命先辈的崇高精神和坚定信仰。",
+                stops: [
+                    "刘少奇故里：向伟人敬献花篮，举行宣誓仪式，参观纪念馆了解刘少奇同志的革命生涯",
+                    "何叔衡故居：了解中国共产党创始人之一的生平事迹，感受早期革命家的奋斗精神",
+                    "谢觉哉故居：参观革命先辈故居，了解其对中国革命的贡献",
+                    "开展'红色故事会'：邀请老党员后代分享革命故事，传承红色基因"
+                ],
+                highlights: [
+                    "庄严的宣誓仪式，增强使命感和责任感",
+                    "与革命先辈后代面对面交流，感受红色家风",
+                    "深度了解中国共产党早期历史"
+                ]
+            },
+            "nature": {
+                title: "山水探秘·诗意之路",
+                subtitle: "感受自然之美，体验禅意生活",
+                description: "这条路线带领参与者领略宁乡优美的自然风光，体验独特的禅茶文化，在山水之间寻找内心的宁静与平和。",
+                stops: [
+                    "炭河古城：观看大型实景演出《炭河千古情》，了解宁乡青铜文化历史",
+                    "沩山风景名胜区：登山观景，参观密印寺，体验禅茶文化",
+                    "灰汤温泉：享受天然温泉的疗愈效果，放松身心"
+                ],
+                highlights: [
+                    "《炭河千古情》实景演出，震撼的视听体验",
+                    "沩山禅茶体验，感受茶禅一味的境界",
+                    "灰汤温泉休闲疗愈，消除疲劳焕发活力"
+                ]
+            },
+            "craft": {
+                title: "非遗匠心·传承之路",
+                subtitle: "体验传统工艺，传承非遗文化",
+                description: "这条路线以宁乡丰富的非物质文化遗产为核心，通过亲手体验传统工艺制作，感受非遗文化的独特魅力，传承匠心精神。",
+                stops: [
+                    "炭河里青铜器制作工坊：体验古老的陶范铸造工艺，了解青铜器制作技艺",
+                    "非遗皮影戏馆：学习皮影戏表演技巧，亲自表演一段传统剧目",
+                    "宁乡四碟八碗美食制作体验：学习制作宁乡传统宴席菜肴，品尝地道美食"
+                ],
+                highlights: [
+                    "亲手制作青铜器模型，了解古代工艺技术",
+                    "学习皮影戏表演，感受传统艺术的魅力",
+                    "制作并品尝宁乡传统美食，体验饮食文化"
+                ]
+            },
+            "village": {
+                title: "村落寻幽·乡愁之路",
+                subtitle: "探寻乡村变迁，感受田园生活",
+                description: "这条路线带领参与者走进宁乡的特色村落，了解乡村振兴的成果，体验农耕文化，感受浓浓的乡愁记忆。",
+                stops: [
+                    "关山古镇：体验三国文化，了解古镇保护与开发",
+                    "芦泉湾美丽乡村：入住特色民宿，体验农耕文化，参与农事活动",
+                    "沙田乡：走访乡村振兴示范点，了解新农村建设成果"
+                ],
+                highlights: [
+                    "关山古镇三国文化体验，穿越历史时空",
+                    "芦泉湾民宿体验，感受田园生活乐趣",
+                    "沙田乡乡村振兴走访，了解农村发展变化"
+                ]
+            }
+        };
+
+        // DOM元素
+        const startBtn = document.getElementById('start-btn');
+        const questionnaireContainer = document.getElementById('questionnaire-container');
+        const routeQuiz = document.getElementById('route-quiz');
+        const submitBtn = document.getElementById('submit-btn');
+        const routeResult = document.getElementById('route-result');
+
+        // 开始问卷
+        startBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            questionnaireContainer.style.display = 'block';
+            startBtn.style.display = 'none';
+            generateQuestions();
+            submitBtn.style.display = 'block';
+        });
+
+        // 生成问题
+        function generateQuestions() {
+            routeQuiz.innerHTML = '';
+            
+            questions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `
+                    <h3 class="question-title">${index + 1}. ${question.text}</h3>
+                    <div class="options">
+                        ${question.options.map(option => `
+                            <div class="option">
+                                <input type="radio" id="q${question.id}_${option.value}" name="q${question.id}" value="${option.value}">
+                                <label for="q${question.id}_${option.value}">${option.text}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                routeQuiz.appendChild(questionElement);
+            });
+        }
+
+        // 提交问卷
+        submitBtn.addEventListener('click', function() {
+            const answers = getAnswers();
+            const recommendedRoute = calculateRoute(answers);
+            displayRoute(recommendedRoute);
+        });
+
+        // 获取答案
+        function getAnswers() {
+            const answers = [];
+            questions.forEach(question => {
+                const selectedOption = document.querySelector(`input[name="q${question.id}"]:checked`);
+                if (selectedOption) {
+                    answers.push(selectedOption.value);
+                }
+            });
+            return answers;
+        }
+
+        // 计算推荐路线
+        function calculateRoute(answers) {
+            // 简单计分算法：统计每种类型的选择次数
+            const scores = {
+                red: 0,
+                nature: 0,
+                craft: 0,
+                village: 0
+            };
+            
+            answers.forEach(answer => {
+                if (answer.includes('red') || answer === 'study' || answer === 'spirit' || 
+                    answer === 'story' || answer === 'ceremony' || answer === 'history' || 
+                    answer === 'bus' || answer === 'simple' || answer === 'red-souvenir') {
+                    scores.red++;
+                }
+                if (answer.includes('nature') || answer === 'outdoor' || answer === 'relax' || 
+                    answer === 'view' || answer === 'full-day' || answer === 'free' || 
+                    answer === 'geography' || answer === 'walk' || answer === 'local' || 
+                    answer === 'photo') {
+                    scores.nature++;
+                }
+                if (answer.includes('craft') || answer === 'practice' || answer === 'skill' || 
+                    answer === 'make' || answer === 'multiple' || answer === 'create' || 
+                    answer === 'technique' || answer === 'multiple-transport' || answer === 'cook' || 
+                    answer === 'handmade') {
+                    scores.craft++;
+                }
+                if (answer.includes('village') || answer === 'life' || answer === 'development' || 
+                    answer === 'farm' || answer === 'flexible' || answer === 'communicate' || 
+                    answer === 'rural' || answer === 'flexible-transport' || answer === 'farmhouse' || 
+                    answer === 'local-product') {
+                    scores.village++;
+                }
+            });
+            
+            // 返回得分最高的路线类型
+            let maxScore = 0;
+            let recommendedRoute = 'red';
+            
+            for (const route in scores) {
+                if (scores[route] > maxScore) {
+                    maxScore = scores[route];
+                    recommendedRoute = route;
+                }
+            }
+            
+            return recommendedRoute;
+        }
+
+        // 显示推荐路线
+        function displayRoute(routeKey) {
+            const route = routes[routeKey];
+            routeResult.innerHTML = `
+                <h2 class="route-title">${route.title}</h2>
+                <h3 class="route-subtitle">${route.subtitle}</h3>
+                <p class="route-desc">${route.description}</p>
+                
+                <h3 class="route-subtitle">行程安排</h3>
+                <ul class="route-stops">
+                    ${route.stops.map(stop => `<li>${stop}</li>`).join('')}
+                </ul>
+                
+                <h3 class="route-subtitle">路线亮点</h3>
+                <ul class="route-stops">
+                    ${route.highlights.map(highlight => `<li>${highlight}</li>`).join('')}
+                </ul>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="#" class="btn" onclick="window.location.reload()">重新测试</a>
+                </div>
+            `;
+            
+            routeResult.style.display = 'block';
+            questionnaireContainer.style.display = 'none';
+            submitBtn.style.display = 'none';
+            
+            // 滚动到结果区域
+            routeResult.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
